@@ -1,0 +1,90 @@
+{
+  "timestamp": "2026-07-03T17:52:40Z",
+  "insights": {
+    "average_latency_ms": 250.0,
+    "max_cpu_usage": 85,
+    "max_memory_usage": 70,
+    "error_rate": 0.02,
+    "uptime_seconds": 360000
+  },
+  "anomalies": [
+    {
+      "metric": "cpu_usage",
+      "value": 85,
+      "threshold": 80,
+      "severity": "high",
+      "description": "Utilisation CPU élevée, risque de saturation du serveur."
+    },
+    {
+      "metric": "latency_ms",
+      "value": 250,
+      "threshold": 150,
+      "severity": "medium",
+      "description": "Latence anormalement élevée, impact direct sur l'expérience utilisateur."
+    },
+    {
+      "metric": "error_rate",
+      "value": 0.02,
+      "threshold": 0.01,
+      "severity": "medium",
+      "description": "Taux d'erreur élevé, possible dysfonctionnement applicatif."
+    },
+    {
+      "metric": "service_status.api_gateway",
+      "value": 1,
+      "threshold": 0,
+      "severity": "medium",
+      "description": "Le service 'api_gateway' fonctionne en mode dégradé."
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "rec-001",
+      "action": "Répartir la charge CPU (scaling horizontal ou vertical)",
+      "target": "compute",
+      "parameters": {
+        "strategy": "autoscaling",
+        "min_replicas": 2
+      },
+      "benefit_estimate": "Réduction attendue de 20-30% du taux d'utilisation CPU par instance."
+    },
+    {
+      "id": "rec-002",
+      "action": "Mettre en place ou renforcer un cache applicatif",
+      "target": "api_gateway",
+      "parameters": {
+        "strategy": "caching",
+        "ttl_seconds": 60
+      },
+      "benefit_estimate": "Réduction estimée de 30-50% de la latence moyenne."
+    },
+    {
+      "id": "rec-003",
+      "action": "Analyser les logs applicatifs pour isoler la source des erreurs",
+      "target": "application",
+      "parameters": {
+        "strategy": "log_analysis"
+      },
+      "benefit_estimate": "Réduction du taux d'erreur et amélioration de la fiabilité perçue."
+    },
+    {
+      "id": "rec-004",
+      "action": "Redémarrer et investiguer le service 'api_gateway'",
+      "target": "api_gateway",
+      "parameters": {
+        "strategy": "restart_and_investigate"
+      },
+      "benefit_estimate": "Rétablissement de la disponibilité du service 'api_gateway'."
+    }
+  ],
+  "service_status_summary": {
+    "online": [
+      "database",
+      "cache"
+    ],
+    "degraded": [
+      "api_gateway"
+    ],
+    "offline": []
+  }
+}
