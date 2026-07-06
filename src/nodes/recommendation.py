@@ -139,7 +139,7 @@ def _enrich_with_llm_structured(client: Any, recommendations: List[Dict[str, Any
         tool_choice={"type": "tool", "name": "submit_benefit_estimates"},
         messages=[{"role": "user", "content": prompt}],
     )
-
+    print("LLM structured response:", response)
     tool_use = next(b for b in response.content if b.type == "tool_use")
     enriched = {item["id"]: item["benefit"] for item in tool_use.input["estimates"]}
 

@@ -16,6 +16,16 @@ import os
 import sys
 import json
 from datetime import datetime, timezone
+from unittest import result
+
+if __package__ in {None, ""}:
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if project_root not in sys.path:
+        sys.path.insert(0, project_root)
+
+from dotenv import load_dotenv
+load_dotenv()
+
 from src.graph import build_graph
 
 
@@ -65,6 +75,6 @@ def run_pipeline(input_path: str, output_path: str):
 
 
 if __name__ == "__main__":
-    input_path = sys.argv[1] if len(sys.argv) > 1 else "sample_logs/example_from_subject.json"
+    input_path = sys.argv[1] if len(sys.argv) > 1 else "sample_logs/rapport.json"
     output_path = sys.argv[2] if len(sys.argv) > 2 else "output/output.json"
     run_pipeline(input_path, output_path)
